@@ -84,12 +84,12 @@ export function AccountMenu(): JSX.Element | null {
 
             <div className="rounded-[24px] border border-violet/25 bg-violet/10 px-4 py-4">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-violet-200/80">
-                BLR rewards
+                CRD rewards
               </p>
               <p className="mt-2 font-display text-2xl text-white">
                 {rewardBalanceQuery.isLoading
                   ? 'Loading...'
-                  : `${(rewardBalanceQuery.data ?? 0).toFixed(2)} BLR`}
+                  : `${(rewardBalanceQuery.data ?? 0).toFixed(2)} CRD`}
               </p>
             </div>
           </div>

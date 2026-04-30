@@ -52,14 +52,14 @@ export default function DashboardPage(): JSX.Element {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="eyebrow text-violet/80">Rewards</p>
-            <h2 className="mt-2 font-display text-3xl text-ink">Your BLR balance</h2>
+            <h2 className="mt-2 font-display text-3xl text-ink">Your CRD balance</h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-smoke">
-              Every 1 XLM backed earns 10 BLR through an on-chain inter-contract mint.
+              Every 1 XLM backed earns 10 CRD through an on-chain inter-contract mint.
             </p>
           </div>
           <div className="panel-inset rounded-[28px] px-6 py-5 text-left">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-violet/70">
-              {rewardMetadataQuery.data?.symbol ?? 'BLR'} earned
+              {rewardMetadataQuery.data?.symbol ?? 'CRD'} earned
             </p>
             <p className="mt-2 font-display text-4xl text-ink">
               {(rewardBalanceQuery.data ?? 0).toFixed(2)}

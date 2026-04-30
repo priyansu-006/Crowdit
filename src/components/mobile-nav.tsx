@@ -57,7 +57,7 @@ export function MobileNav(): JSX.Element {
                     Reward balance
                   </p>
                   <p className="mt-2 font-display text-xl text-white">
-                    {(rewardBalanceQuery.data ?? 0).toFixed(2)} BLR
+                    {(rewardBalanceQuery.data ?? 0).toFixed(2)} CRD
                   </p>
                 </div>
               </div>
