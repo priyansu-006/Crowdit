@@ -35,7 +35,7 @@ Crowdit is a crowdfunding app on Stellar that treats campaigns like live operati
 
 ## Live links
 
-- Live website: []()
+- Live website: [https://project-cmtxw.vercel.app/](https://project-cmtxw.vercel.app/)
 - Demo video: [Watch demo](snapshots/Crowdit-demo.mp4)
 
 ## Live testnet contracts
@@ -112,7 +112,7 @@ Crowdit is a crowdfunding app on Stellar that treats campaigns like live operati
     </td>
     <td align="center" width="50%">
       <strong>CI/CD</strong><br />
-      <img src="" alt="dashboard" width="240" />
+      <img src="snapshots/image copy 8.png" alt="dashboard" width="240" />
     </td>
   </tr>
 </table>
