@@ -2,91 +2,67 @@ import Link from 'next/link';
 
 const supportedWallets = ['Freighter'];
 const liveStats = [
-  { label: 'Settlement rail', value: 'Stellar testnet' },
-  { label: 'Support pace', value: 'Wallet-first' },
-  { label: 'Creator mode', value: 'Crowd-funded' },
+  { label: 'Network', value: 'Testnet live' },
+  { label: 'Signing', value: 'Wallet-first' },
+  { label: 'Model', value: 'Direct support' },
 ];
 
 export function Hero(): JSX.Element {
   return (
-    <section className="fade-in grid gap-6 lg:grid-cols-[1.35fr_0.65fr]">
-      <div className="surface-dark relative overflow-hidden rounded-[38px] px-6 py-12 sm:px-10 lg:px-12 lg:py-14">
-        <div className="absolute right-8 top-8 h-24 w-24 rounded-full border border-white/10" />
-        <div className="absolute bottom-[-2rem] right-[-1rem] h-44 w-44 rounded-full bg-violet/20 blur-3xl" />
-        <div className="relative max-w-3xl">
-          <p className="eyebrow text-violet-200">Broadcast support in public</p>
-          <h1 className="mt-5 font-display text-5xl leading-[0.95] text-white sm:text-6xl lg:text-7xl">
-            Turn live ideas into campaigns people can back in seconds.
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
-            Crowdit puts campaigns, wallet intent, and post-deadline outcomes on one sharp surface so supporters can move with confidence and creators can build visible momentum.
-          </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/campaigns"
-              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-violet hover:text-white"
+    <section className="fade-in grid gap-0 border border-ink/10 lg:grid-cols-[1.18fr_0.82fr]">
+      <div className="p-6 sm:p-8 lg:border-r lg:border-ink/10 lg:p-10">
+        <p className="eyebrow text-smoke">Live campaign board</p>
+        <h1 className="mt-5 max-w-4xl font-display text-5xl leading-[0.92] text-ink sm:text-6xl lg:text-[5.75rem]">
+          Fund live ideas without burying the ask under platform noise.
+        </h1>
+        <p className="mt-6 max-w-2xl text-base leading-8 text-smoke sm:text-lg">
+          Crowdit gives campaigns a tighter surface: the brief, the deadline, the support curve, and the final action path all stay visible from the same page.
+        </p>
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <Link
+            href="/campaigns"
+            className="inline-flex items-center justify-center border border-ink bg-ink px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-ink"
+          >
+            Browse live campaigns
+          </Link>
+          <Link
+            href="/create"
+            className="inline-flex items-center justify-center border border-ink/10 px-6 py-3 text-sm font-semibold text-ink transition hover:border-violet hover:text-violet"
+          >
+            Start a campaign
+          </Link>
+        </div>
+      </div>
+
+      <div className="surface-dark p-6 sm:p-8 lg:p-10">
+        <p className="eyebrow text-violet-200">At a glance</p>
+        <div className="mt-5 space-y-0 border border-white/10">
+          {liveStats.map((item) => (
+            <div
+              key={item.label}
+              className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4 last:border-b-0"
             >
-              Open Campaign Index
-            </Link>
-            <Link
-              href="/create"
-              className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/6 px-6 py-3 text-sm font-semibold text-white transition hover:border-violet/55 hover:bg-white/10"
-            >
-              Start a Funding Drop
-            </Link>
-          </div>
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <span className="eyebrow text-white/42">Wallet lane</span>
+              <p className="text-sm text-white/55">{item.label}</p>
+              <p className="text-sm font-semibold text-white">{item.value}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8">
+          <p className="eyebrow text-white/42">Wallet support</p>
+          <div className="mt-4 flex flex-wrap gap-3">
             {supportedWallets.map((wallet) => (
               <span
                 key={wallet}
-                className="rounded-full border border-white/10 bg-white/8 px-3 py-2 text-sm font-semibold text-white/78"
+                className="border border-white/10 px-3 py-2 text-sm font-semibold text-white/78"
               >
                 {wallet}
               </span>
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="flex flex-col gap-6">
-        <div className="glass-panel rounded-[34px] p-6 sm:p-7">
-          <p className="eyebrow text-smoke">Signal stack</p>
-          <div className="mt-5 space-y-4">
-            {liveStats.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-center justify-between gap-4 border-b border-ink/8 pb-4 last:border-b-0 last:pb-0"
-              >
-                <p className="text-sm text-smoke">{item.label}</p>
-                <p className="text-right font-semibold text-ink">{item.value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="panel-inset rounded-[34px] p-6 sm:p-7">
-          <p className="eyebrow text-violet/80">How it moves</p>
-          <div className="mt-5 space-y-5">
-            <div>
-              <p className="text-sm font-semibold text-ink">1. Launch the brief</p>
-              <p className="mt-1 text-sm leading-6 text-smoke">
-                Define the story, target, and deadline in a campaign page that reads like a live brief.
-              </p>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-ink">2. Capture support</p>
-              <p className="mt-1 text-sm leading-6 text-smoke">
-                Backers connect Freighter, confirm XLM, and see progress update without guesswork.
-              </p>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-ink">3. Resolve cleanly</p>
-              <p className="mt-1 text-sm leading-6 text-smoke">
-                Claim and refund paths stay visible so campaign outcomes remain legible after the deadline.
-              </p>
-            </div>
-          </div>
-        </div>
+        <p className="mt-8 text-sm leading-7 text-white/68">
+          Designed for people who want the campaign state to stay readable while they decide whether to back, wait, claim, or refund.
+        </p>
       </div>
     </section>
   );

@@ -21,10 +21,7 @@ html {
 body {
   min-height: 100vh;
   color: var(--ink);
-  background:
-    radial-gradient(circle at top center, rgba(124, 58, 237, 0.14), transparent 26%),
-    radial-gradient(circle at 80% 12%, rgba(124, 58, 237, 0.08), transparent 20%),
-    linear-gradient(180deg, #ffffff 0%, #f8f8fb 52%, #f4f2fb 100%);
+  background: #ffffff;
   font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
 }
 
@@ -45,26 +42,19 @@ body {
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.92);
+  background: #ffffff;
   border: 1px solid var(--line);
-  box-shadow: 0 24px 70px rgba(12, 10, 18, 0.08);
-  backdrop-filter: blur(18px);
 }
 
 .panel-inset {
-  background:
-    linear-gradient(180deg, rgba(124, 58, 237, 0.06), transparent 32%),
-    rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(124, 58, 237, 0.14);
+  background: #faf8ff;
+  border: 1px solid rgba(124, 58, 237, 0.16);
 }
 
 .surface-dark {
-  background:
-    radial-gradient(circle at top right, rgba(124, 58, 237, 0.2), transparent 34%),
-    linear-gradient(180deg, #171721 0%, #0a0a0f 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0a0a0f;
+  border: 1px solid #0a0a0f;
   color: white;
-  box-shadow: 0 28px 72px rgba(12, 10, 18, 0.22);
 }
 
 .eyebrow {
@@ -91,7 +81,7 @@ body {
   position: absolute;
   inset: 0;
   transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.88), transparent);
+  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.1), transparent);
   animation: shimmer 1.6s infinite;
 }
 

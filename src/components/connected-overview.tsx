@@ -23,7 +23,8 @@ export function ConnectedOverview(): JSX.Element | null {
   }, 0);
 
   return (
-    <section className="glass-panel rounded-[34px] p-8">
+    <section className="grid gap-0 border border-ink/10 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="p-8 lg:border-r lg:border-ink/10">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="eyebrow text-smoke">Account overview</p>
@@ -31,10 +32,10 @@ export function ConnectedOverview(): JSX.Element | null {
             Connected as {truncateAddress(session.address)}
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-smoke">
-            Review your balance, track campaigns you launched, and keep an eye on your support activity in one place.
+            Keep the wallet, the campaigns you run, and the campaigns you support on one operational readout.
           </p>
         </div>
-        <div className="panel-inset rounded-[24px] px-5 py-4 text-right">
+        <div className="panel-inset px-5 py-4 text-right">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-violet/70">
             Available balance
           </p>
@@ -60,22 +61,32 @@ export function ConnectedOverview(): JSX.Element | null {
       <div className="mt-6 flex flex-wrap gap-3">
         <Link
           href="/create"
-          className="rounded-full bg-violet px-5 py-3 text-sm font-semibold text-white transition hover:bg-violetDeep"
+          className="border border-ink bg-ink px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-ink"
         >
           Launch another campaign
         </Link>
         <Link
           href="/campaigns"
-          className="rounded-full border border-ink/10 bg-white px-5 py-3 text-sm font-semibold text-ink transition hover:border-violet/45 hover:text-violet"
+          className="border border-ink/10 px-5 py-3 text-sm font-semibold text-ink transition hover:border-violet hover:text-violet"
         >
           Review campaigns
         </Link>
         <Link
           href="/dashboard"
-          className="rounded-full border border-ink/10 bg-white px-5 py-3 text-sm font-semibold text-ink transition hover:border-violet/45 hover:text-violet"
+          className="border border-ink/10 px-5 py-3 text-sm font-semibold text-ink transition hover:border-violet hover:text-violet"
         >
           Open dashboard
         </Link>
+      </div>
+      </div>
+      <div className="surface-dark p-8">
+        <p className="eyebrow text-violet-200">Wallet posture</p>
+        <p className="mt-4 font-display text-3xl leading-tight text-white">
+          Your wallet becomes the control point for publishing, backing, claiming, and refunding.
+        </p>
+        <p className="mt-4 text-sm leading-7 text-white/68">
+          Crowdit does not hide critical actions behind a different workflow. If the contract state unlocks something for this address, it should be legible here first.
+        </p>
       </div>
     </section>
   );

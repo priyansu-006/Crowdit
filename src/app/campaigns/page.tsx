@@ -22,49 +22,58 @@ export default function CampaignsPage(): JSX.Element {
 
   return (
     <div className="space-y-8">
-      <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="surface-dark rounded-[34px] p-6 sm:p-8">
-          <p className="eyebrow text-violet-200">Campaign index</p>
-          <h1 className="mt-3 font-display text-5xl leading-none text-white">Browse every Crowdit project</h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-white/70">
-            Scan live progress, read the brief, and jump into support without losing sight of goal, timing, or outcome.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            {session ? (
-              <Link
-                href="/create"
-                className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink transition hover:bg-violet hover:text-white"
-              >
-                Create Campaign
-              </Link>
-            ) : (
-              <span className="rounded-full border border-violet/25 bg-violet/12 px-4 py-2 text-sm font-semibold text-violet-100">
-                Connect a wallet to create a campaign
-              </span>
-            )}
+      <section className="border border-ink/10 p-6 sm:p-8">
+        <p className="eyebrow text-smoke">Campaign board</p>
+        <h1 className="mt-3 font-display text-4xl leading-tight text-ink">Read the whole room before you choose where to move.</h1>
+        <p className="mt-4 text-sm leading-7 text-smoke">
+          This board is optimized for scanning timing, pressure, and traction quickly. Open any campaign to inspect the brief, then step directly into support.
+        </p>
+      </section>
+      <section className="surface-dark p-6 sm:p-8">
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          <div>
+            <p className="eyebrow text-violet-200">Live campaign index</p>
+            <h2 className="mt-3 font-display text-5xl leading-none text-white">Browse every Crowdit project</h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-white/70">
+              Scan support velocity, compare deadlines, and move from discovery to action without losing the campaign narrative.
+            </p>
+          </div>
+          <div className="border border-white/10 bg-white/6 p-5">
+            <p className="eyebrow text-white/42">Filters</p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              {filters.map((item) => (
+                <button
+                  key={item.value}
+                  type="button"
+                  onClick={() => setFilter(item.value)}
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                    filter === item.value
+                      ? 'bg-white text-ink'
+                      : 'border border-white/10 bg-white/6 text-white hover:border-violet/45'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="glass-panel rounded-[34px] p-6 sm:p-8">
-          <p className="eyebrow text-smoke">View controls</p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            {filters.map((item) => (
-              <button
-                key={item.value}
-                type="button"
-                onClick={() => setFilter(item.value)}
-                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                  filter === item.value
-                    ? 'bg-violet text-white'
-                    : 'border border-ink/10 bg-white text-ink hover:border-violet/45 hover:text-violet'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          {session ? (
+            <Link
+              href="/create"
+              className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink transition hover:bg-violet hover:text-white"
+            >
+              Publish a campaign
+            </Link>
+          ) : (
+            <span className="rounded-full border border-violet/25 bg-violet/12 px-4 py-2 text-sm font-semibold text-violet-100">
+              Connect a wallet to publish your own brief
+            </span>
+          )}
         </div>
       </section>
-      <section className="glass-panel rounded-[34px] p-6 sm:p-8">
+      <section className="border border-ink/10 p-6 sm:p-8">
         <div className="grid gap-4 md:grid-cols-[1fr_220px]">
           <label className="block">
             <span className="text-sm font-semibold text-ink">Search campaigns</span>
@@ -91,6 +100,12 @@ export default function CampaignsPage(): JSX.Element {
             </select>
           </label>
         </div>
+      </section>
+      <section className="panel-inset p-6 sm:p-8">
+        <p className="eyebrow text-violet/80">How to read it</p>
+        <p className="mt-4 text-sm leading-7 text-smoke">
+          Use deadline sorting to find urgency, raised sorting to find traction, and backer sorting to find campaigns that are already pulling a community around them.
+        </p>
       </section>
       <AppModePanel />
       <CampaignGrid filter={filter} searchTerm={searchTerm} sortBy={sortBy} />

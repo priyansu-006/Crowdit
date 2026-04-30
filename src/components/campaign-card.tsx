@@ -20,21 +20,20 @@ export function CampaignCard({
 
   return (
     <article
-      className={`fade-in relative flex h-full flex-col overflow-hidden rounded-[30px] border border-ink/10 bg-white p-6 shadow-soft ${
+      className={`fade-in relative flex h-full flex-col overflow-hidden border-t border-r border-ink/10 bg-white p-6 ${
         isEnded ? 'opacity-80 saturate-75' : ''
       }`}
     >
       {isEnded ? (
         <div className="pointer-events-none absolute inset-0 bg-paper/65" aria-hidden="true" />
       ) : null}
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-violet via-violetDeep to-ink" />
       <div className="flex items-start justify-between gap-4">
         <div>
-          <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${badgeStyles[status]}`}>
+          <span className={`inline-flex px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] ${badgeStyles[status]}`}>
             {status}
           </span>
           {campaign.claimed ? (
-            <span className="ml-2 inline-flex rounded-full bg-violet/12 px-3 py-1 text-xs font-semibold text-violet">
+            <span className="ml-2 inline-flex border border-violet/15 bg-violet/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-violet">
               claimed
             </span>
           ) : null}
@@ -43,7 +42,7 @@ export function CampaignCard({
             {!isEnded ? <LiveBadge /> : null}
           </div>
         </div>
-        <span className="rounded-full border border-ink/8 bg-paper px-3 py-1 text-xs font-medium text-smoke">
+        <span className="border border-ink/8 px-3 py-1 text-xs font-medium text-smoke">
           {formatCountdownLabel(campaign.deadline)}
         </span>
       </div>
@@ -51,7 +50,7 @@ export function CampaignCard({
       <div className="mt-6">
         <ProgressBar raised={campaign.raised} goal={campaign.goal} />
       </div>
-      <dl className="mt-6 grid grid-cols-2 gap-4 rounded-[26px] border border-ink/8 bg-paper p-4 text-sm text-ink/80">
+      <dl className="mt-6 grid grid-cols-2 gap-4 border border-ink/8 p-4 text-sm text-ink/80">
         <div>
           <dt className="text-smoke">Goal</dt>
           <dd className="mt-1 font-semibold">{formatXlm(campaign.goal)}</dd>
@@ -71,7 +70,7 @@ export function CampaignCard({
       </dl>
       <Link
         href={`/campaign/${campaign.id}`}
-        className="relative mt-8 inline-flex min-h-11 items-center justify-center rounded-full bg-violet px-5 py-3 text-sm font-semibold text-white transition hover:bg-violetDeep"
+        className="relative mt-8 inline-flex min-h-11 items-center justify-center border border-ink bg-ink px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-ink"
       >
         View Details
       </Link>

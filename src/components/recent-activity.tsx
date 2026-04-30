@@ -34,18 +34,26 @@ export function RecentActivity(): JSX.Element {
     .slice(0, 5);
 
   return (
-    <section className="glass-panel rounded-[30px] p-6">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="eyebrow text-smoke">Recent activity</p>
-          <h3 className="mt-2 font-display text-3xl text-ink">Latest support across Crowdit</h3>
-        </div>
+    <section className="grid gap-0 border border-ink/10 lg:grid-cols-[0.72fr_1.28fr]">
+      <div className="border-b border-ink/10 p-6 lg:border-b-0 lg:border-r">
+        <p className="eyebrow text-smoke">Recent activity</p>
+        <h3 className="mt-3 font-display text-4xl leading-tight text-ink">See who just pushed a campaign forward.</h3>
+        <p className="mt-4 text-sm leading-7 text-smoke">
+          Every new contribution shifts the tone of a campaign. This stream surfaces those support moves as they land.
+        </p>
         <Link
           href="/campaigns"
-          className="rounded-full border border-ink/10 bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:border-violet/45 hover:text-violet"
+          className="mt-6 inline-flex rounded-full border border-ink/10 bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:border-violet/45 hover:text-violet"
         >
           See all campaigns
         </Link>
+      </div>
+      <div className="p-6">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p className="eyebrow text-smoke">Live contribution stream</p>
+          <h3 className="mt-2 font-display text-3xl text-ink">Latest support across Crowdit</h3>
+        </div>
       </div>
       <div className="mt-5 space-y-3">
         {items.length === 0 ? (
@@ -72,6 +80,7 @@ export function RecentActivity(): JSX.Element {
             </Link>
           ))
         )}
+      </div>
       </div>
     </section>
   );

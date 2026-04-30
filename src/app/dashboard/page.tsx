@@ -28,13 +28,20 @@ export default function DashboardPage(): JSX.Element {
 
   return (
     <div className="space-y-8 sm:space-y-10">
-      <section className="surface-dark rounded-[34px] p-6 sm:p-8">
+      <section className="border border-ink/10 p-6 sm:p-8">
+        <p className="eyebrow text-smoke">Operator view</p>
+        <h1 className="mt-3 font-display text-4xl leading-tight text-ink">Your dashboard tracks what you launched, what you backed, and what needs action next.</h1>
+        <p className="mt-4 text-sm leading-7 text-smoke">
+          Think of this as your campaign control room: balances, unfinished outcomes, and campaign state changes all sit here.
+        </p>
+      </section>
+      <section className="surface-dark p-6 sm:p-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="eyebrow text-violet-200">Dashboard</p>
             <h1 className="mt-2 font-display text-5xl leading-none text-white">Manage your Crowdit activity</h1>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-white/68">
-              Review created campaigns, backed projects, and any claim or refund actions that are ready.
+              Review the campaigns you operate, the ones you support, and the contract actions waiting on your wallet.
             </p>
           </div>
           <Link
@@ -48,13 +55,13 @@ export default function DashboardPage(): JSX.Element {
 
       <ConnectedOverview />
 
-      <section className="glass-panel rounded-[34px] p-6 sm:p-8">
+      <section className="border border-ink/10 p-6 sm:p-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="eyebrow text-violet/80">Rewards</p>
             <h2 className="mt-2 font-display text-3xl text-ink">Your CRD balance</h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-smoke">
-              Every 1 XLM backed earns 10 CRD through an on-chain inter-contract mint.
+              Every 1 XLM backed earns 10 CRD, creating a visible reward line tied directly to support activity.
             </p>
           </div>
           <div className="panel-inset rounded-[28px] px-6 py-5 text-left">
@@ -67,23 +74,22 @@ export default function DashboardPage(): JSX.Element {
           </div>
         </div>
       </section>
-
-      <div className="grid gap-4 md:grid-cols-2">
+      <section className="grid gap-4 md:grid-cols-2">
         <div className="glass-panel rounded-[30px] p-6">
           <p className="eyebrow text-smoke">Claim queue</p>
           <p className="mt-3 font-display text-4xl text-ink">{claimable.length}</p>
           <p className="mt-2 text-sm text-smoke">
-            Creator campaigns that reached goal and deadline without being claimed yet.
+            Campaigns you can settle because the goal landed and the deadline is over.
           </p>
         </div>
         <div className="glass-panel rounded-[30px] p-6">
           <p className="eyebrow text-smoke">Refund queue</p>
           <p className="mt-3 font-display text-4xl text-ink">{refundable.length}</p>
           <p className="mt-2 text-sm text-smoke">
-            Backed campaigns that missed their goal and may now be eligible for refund actions.
+            Campaigns you backed that missed the mark and may now be eligible for a refund path.
           </p>
         </div>
-      </div>
+      </section>
 
       <CampaignCollection
         eyebrow="Created"
