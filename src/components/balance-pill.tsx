@@ -18,16 +18,16 @@ export function BalancePill({
 
   if (balanceQuery.isLoading) {
     return (
-      <div className="rounded-full border border-white/60 bg-white/80 px-4 py-3">
+      <div className="border border-white/20 bg-white/6 px-4 py-3">
         <LoadingSpinner label="Fetching balance..." size="sm" />
       </div>
     );
   }
 
   return (
-    <div className="rounded-[24px] border border-white/70 bg-white/80 px-4 py-3 shadow-soft">
-      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-ink/45">Wallet balance</p>
-      <p className="mt-2 font-display text-xl text-ink">
+    <div className="border border-white/20 bg-white/6 px-4 py-4">
+      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/45">Wallet balance</p>
+      <p className="mt-2 font-display text-xl text-white">
         {formatXlm(balanceQuery.data ?? 0)}
       </p>
       <div className="mt-2">

@@ -34,8 +34,6 @@ export default function RootLayout({
         <Providers>
           <ErrorBoundary>
             <div className="app-shell min-h-screen">
-              <div className="orb left-[-6rem] top-16 h-56 w-56 bg-violet/18" />
-              <div className="orb right-[-3rem] top-32 h-64 w-64 bg-violet/12" />
               <Navbar />
               <main
                 id="top"

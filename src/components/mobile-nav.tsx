@@ -13,14 +13,14 @@ export function MobileNav(): JSX.Element {
   const { session } = useWallet();
   const rewardBalanceQuery = useRewardBalance(session?.address ?? null);
   const navLinkClassName =
-    'rounded-[22px] border border-white/10 bg-white/6 px-4 py-3 text-left text-sm font-semibold text-white/82 transition hover:border-violet/45 hover:bg-white/10';
+    'border-t border-white/10 px-4 py-4 text-left text-sm font-semibold text-white transition hover:bg-white hover:text-ink';
 
   return (
     <div className="md:hidden">
       <button
         type="button"
         onClick={() => setIsOpen((current) => !current)}
-        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-violet/45"
+        className="inline-flex min-h-11 min-w-11 items-center justify-center border border-ink/10 bg-white text-ink transition hover:bg-ink hover:text-white"
         aria-expanded={isOpen}
         aria-label="Toggle navigation menu"
       >
@@ -31,30 +31,36 @@ export function MobileNav(): JSX.Element {
         <>
           <button
             type="button"
-            className="fixed inset-0 z-30"
+            className="fixed inset-0 z-30 bg-black/20"
             onClick={() => setIsOpen(false)}
             aria-label="Close navigation menu"
           />
-          <div className="surface-dark fixed inset-x-4 top-20 z-40 rounded-[30px] p-4">
-            <nav className="flex flex-col gap-3">
+          <div className="surface-dark fixed inset-x-4 top-20 z-40 border border-ink p-0">
+            <div className="border-b border-white/10 px-4 py-4">
+              <p className="eyebrow text-violet-200">Quick access</p>
+              <p className="mt-2 text-sm text-white/68">
+                Jump between the live board, your publish flow, and wallet controls.
+              </p>
+            </div>
+            <nav className="flex flex-col">
               <Link href="/campaigns" className={navLinkClassName} onClick={() => setIsOpen(false)}>
-                Campaigns
+                Open board
               </Link>
               <Link href="/create" className={navLinkClassName} onClick={() => setIsOpen(false)}>
-                Create Campaign
+                Publish campaign
               </Link>
               {session ? (
                 <Link href="/dashboard" className={navLinkClassName} onClick={() => setIsOpen(false)}>
-                  Dashboard
+                  Open control room
                 </Link>
               ) : null}
             </nav>
             {session?.address ? (
-              <div className="mt-4 space-y-3">
+              <div className="border-t border-white/10 p-4">
                 <BalancePill address={session.address} />
-                <div className="rounded-[24px] border border-violet/25 bg-white/6 px-4 py-3">
+                <div className="mt-4 border border-violet/20 bg-white/6 px-4 py-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.25em] text-violet-200/80">
-                    Reward balance
+                    Reward line
                   </p>
                   <p className="mt-2 font-display text-xl text-white">
                     {(rewardBalanceQuery.data ?? 0).toFixed(2)} CRD
@@ -62,7 +68,7 @@ export function MobileNav(): JSX.Element {
                 </div>
               </div>
             ) : null}
-            <div className="mt-4">
+            <div className="border-t border-white/10 p-4">
               <WalletButton />
             </div>
           </div>

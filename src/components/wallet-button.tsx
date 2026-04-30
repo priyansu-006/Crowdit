@@ -18,14 +18,14 @@ export function WalletButton(): JSX.Element {
   if (session) {
     return (
       <>
-        <div className="flex items-center gap-3">
-          <div className="hidden rounded-full border border-violet/25 bg-violet/12 px-4 py-2 text-sm font-semibold text-violet md:flex">
-            Freighter connected
+        <div className="flex items-center gap-0 border border-ink/10">
+          <div className="hidden border-r border-ink/10 px-4 py-3 text-sm font-semibold text-ink md:flex">
+            Wallet live
           </div>
           <button
             type="button"
             onClick={disconnectWallet}
-            className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-violet/50 hover:bg-white/10"
+            className="px-4 py-3 text-sm font-semibold text-ink transition hover:bg-ink hover:text-white"
           >
             Disconnect
           </button>
@@ -55,12 +55,12 @@ export function WalletButton(): JSX.Element {
           }
         }}
         disabled={isConnecting}
-        className="rounded-full bg-violet px-5 py-3 text-sm font-semibold text-white transition hover:bg-violetDeep"
+        className="border border-ink bg-ink px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-ink"
       >
-        {isConnecting ? 'Connecting to Freighter...' : 'Connect Freighter'}
+        {isConnecting ? 'Connecting wallet...' : 'Connect wallet'}
       </button>
       {lastWalletId === 'freighter' ? (
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-smoke">
           Freighter ready
         </p>
       ) : null}

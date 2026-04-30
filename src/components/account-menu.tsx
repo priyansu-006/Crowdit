@@ -49,11 +49,11 @@ export function AccountMenu(): JSX.Element | null {
       <button
         type="button"
         onClick={() => setIsOpen((current) => !current)}
-        className="inline-flex min-h-11 items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-violet/45 hover:bg-white/10"
+        className="inline-flex min-h-12 items-center gap-3 border border-ink/10 bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:bg-ink hover:text-white"
         aria-expanded={isOpen}
         aria-label="Open account menu"
       >
-        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-violet text-white">
+        <span className="inline-flex h-8 w-8 items-center justify-center border border-ink bg-ink text-white">
           <User size={16} />
         </span>
         <span>{truncateAddress(session.address)}</span>
@@ -61,32 +61,32 @@ export function AccountMenu(): JSX.Element | null {
       </button>
 
       {isOpen ? (
-        <div className="surface-dark absolute right-0 top-[calc(100%+0.75rem)] z-50 w-80 rounded-[28px] p-4 backdrop-blur-lg">
-          <div className="rounded-[24px] border border-white/10 bg-white/6 px-4 py-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/45">
-              Freighter connected
+        <div className="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-80 border border-ink/10 bg-white p-0">
+          <div className="border-b border-ink/10 px-4 py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-smoke">
+              Active wallet
             </p>
-            <p className="mt-2 break-all text-sm font-semibold text-white">{session.address}</p>
+            <p className="mt-2 break-all text-sm font-semibold text-ink">{session.address}</p>
           </div>
 
-          <div className="mt-3 grid gap-3">
-            <div className="rounded-[24px] border border-white/10 bg-white/6 px-4 py-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/45">
-                Wallet balance
+          <div className="grid gap-0">
+            <div className="border-b border-ink/10 px-4 py-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-smoke">
+                Available XLM
               </p>
-              <p className="mt-2 font-display text-2xl text-white">
+              <p className="mt-2 font-display text-2xl text-ink">
                 {balanceQuery.isLoading ? 'Loading...' : formatXlm(balanceQuery.data ?? 0)}
               </p>
-              <p className="mt-2 text-xs text-white/55">
+              <p className="mt-2 text-xs text-smoke">
                 Last updated: {formatRelativeUpdate(balanceQuery.dataUpdatedAt)}
               </p>
             </div>
 
-            <div className="rounded-[24px] border border-violet/25 bg-violet/10 px-4 py-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-violet-200/80">
-                CRD rewards
+            <div className="border-b border-ink/10 px-4 py-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-violet/80">
+                CRD reward line
               </p>
-              <p className="mt-2 font-display text-2xl text-white">
+              <p className="mt-2 font-display text-2xl text-ink">
                 {rewardBalanceQuery.isLoading
                   ? 'Loading...'
                   : `${(rewardBalanceQuery.data ?? 0).toFixed(2)} CRD`}
@@ -100,7 +100,7 @@ export function AccountMenu(): JSX.Element | null {
               disconnectWallet();
               setIsOpen(false);
             }}
-            className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/6 px-4 py-3 text-sm font-semibold text-white transition hover:border-violet/45"
+            className="inline-flex min-h-12 w-full items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-ink transition hover:bg-ink hover:text-white"
           >
             <LogOut size={16} />
             Disconnect
