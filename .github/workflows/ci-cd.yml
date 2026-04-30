@@ -1,0 +1,56 @@
+name: Release Readiness
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-build:
+    name: Compile Frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate TypeScript
+        run: pnpm lint
+
+      - name: Create production build
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_NETWORK: testnet
+          NEXT_PUBLIC_CONTRACT_ID: ${{ secrets.CONTRACT_ID }}
+          NEXT_PUBLIC_REWARD_TOKEN_ID: ${{ secrets.REWARD_TOKEN_ID }}
+          NEXT_PUBLIC_SOROBAN_RPC_URL: https://soroban-testnet.stellar.org
+          NEXT_PUBLIC_HORIZON_URL: https://horizon-testnet.stellar.org
+          NEXT_PUBLIC_STELLAR_EXPERT_URL: https://stellar.expert/explorer/testnet
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: crowdit-next-build
+          path: .next
+          retention-days: 7

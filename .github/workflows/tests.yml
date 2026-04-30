@@ -1,0 +1,65 @@
+name: Verification Matrix
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend-tests:
+    name: Frontend Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check app
+        run: pnpm lint
+
+      - name: Run Vitest suite
+        run: pnpm test
+
+  contract-tests:
+    name: Soroban Contract Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32v1-none
+
+      - name: Warm contract target
+        run: cargo check --manifest-path contracts/crowdfund/Cargo.toml
+
+      - name: Run crowdfund contract tests
+        run: cargo test --manifest-path contracts/crowdfund/Cargo.toml
+
+      - name: Run reward token contract tests
+        run: cargo test --manifest-path contracts/reward-token/Cargo.toml
