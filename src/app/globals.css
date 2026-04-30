@@ -1,0 +1,141 @@
+@config "../../tailwind.config.ts";
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --ink: #0a0a0f;
+  --paper: #f8f8fb;
+  --graphite: #15151d;
+  --smoke: #6d6a78;
+  --violet: #7c3aed;
+  --violet-deep: #5b21b6;
+  --violet-soft: #ede9fe;
+  --line: rgba(21, 21, 29, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--paper);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top center, rgba(124, 58, 237, 0.14), transparent 26%),
+    radial-gradient(circle at 80% 12%, rgba(124, 58, 237, 0.08), transparent 20%),
+    linear-gradient(180deg, #ffffff 0%, #f8f8fb 52%, #f4f2fb 100%);
+  font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(21, 21, 29, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 21, 29, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), transparent 88%);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 70px rgba(12, 10, 18, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.panel-inset {
+  background:
+    linear-gradient(180deg, rgba(124, 58, 237, 0.06), transparent 32%),
+    rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(124, 58, 237, 0.14);
+}
+
+.surface-dark {
+  background:
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.2), transparent 34%),
+    linear-gradient(180deg, #171721 0%, #0a0a0f 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+  box-shadow: 0 28px 72px rgba(12, 10, 18, 0.22);
+}
+
+.eyebrow {
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.88), transparent);
+  animation: shimmer 1.6s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: float-in 0.6s ease both;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.14);
+}
+
+::selection {
+  background: rgba(124, 58, 237, 0.18);
+}
