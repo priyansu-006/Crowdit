@@ -87,98 +87,75 @@ export default function CampaignDetailsPage(): JSX.Element {
     contribution > 0;
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-      <section className="glass-panel rounded-[34px] p-8">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <span className="rounded-full border border-violet/15 bg-violet/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-violet">
-            {status}
-          </span>
-          <CachedAt updatedAt={campaignQuery.dataUpdatedAt} />
+    <div className="space-y-8">
+      <section className="grid gap-0 border border-ink/10 xl:grid-cols-[1.18fr_0.82fr]">
+        <div className="p-8 xl:border-r xl:border-ink/10 xl:p-10">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <span className="border border-violet/15 bg-violet/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-violet">
+              {status}
+            </span>
+            <CachedAt updatedAt={campaignQuery.dataUpdatedAt} />
+          </div>
+          <h1 className="mt-5 max-w-4xl font-display text-5xl leading-[0.92] text-ink lg:text-[5rem]">
+            {campaign.title}
+          </h1>
+          <p className="mt-5 max-w-3xl text-base leading-8 text-smoke">
+            {campaign.description}
+          </p>
+          <div className="mt-8">
+            <ProgressBar raised={campaign.raised} goal={campaign.goal} large />
+          </div>
         </div>
-        <h1 className="mt-5 font-display text-5xl leading-none text-ink">{campaign.title}</h1>
-        <p className="mt-4 max-w-3xl text-base leading-8 text-smoke">{campaign.description}</p>
-        <CampaignStateBanner campaign={campaign} status={status} />
-        <div className="mt-8">
-          <ProgressBar raised={campaign.raised} goal={campaign.goal} large />
-        </div>
-        <dl className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <dt className="text-sm text-smoke">Creator</dt>
-            <dd className="mt-2 font-semibold text-ink">{truncateAddress(campaign.creator)}</dd>
-          </div>
-          <div>
-            <dt className="text-sm text-smoke">Goal</dt>
-            <dd className="mt-2 font-semibold text-ink">{formatXlm(campaign.goal)}</dd>
-          </div>
-          <div>
-            <dt className="text-sm text-smoke">Raised</dt>
-            <dd className="mt-2 font-semibold text-ink">{formatXlm(campaign.raised)}</dd>
-          </div>
-          <div>
-            <dt className="text-sm text-smoke">Backers</dt>
-            <dd className="mt-2 font-semibold text-ink">{campaign.backers.length}</dd>
-          </div>
-          <div>
-            <dt className="text-sm text-smoke">Deadline</dt>
-            <dd className="mt-2 font-semibold text-ink">
-              {formatDeadline(campaign.deadline)}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm text-smoke">Countdown</dt>
-            <dd className="mt-2 font-semibold text-ink">
-              <LiveCountdown deadline={campaign.deadline} />
-            </dd>
-          </div>
-          <div>
-            <dt className="text-sm text-smoke">Remaining</dt>
-            <dd className="mt-2 font-semibold text-ink">{formatXlm(remainingToGoal)}</dd>
-          </div>
-        </dl>
-        <CampaignRolePanel
-          isCreator={Boolean(isCreator)}
-          contribution={contribution}
-          deadlinePassed={deadlinePassed}
-          canClaim={canClaim}
-          canRefund={canRefund}
-          deadline={campaign.deadline}
-          claimed={campaign.claimed}
-        />
-        <div className="mt-10">
-          <h2 className="font-display text-2xl text-ink">Recent backers</h2>
-          <div className="mt-4 space-y-3">
-            {campaign.backers.length === 0 ? (
-              <div className="rounded-3xl border border-dashed border-ink/15 bg-white/55 p-5 text-sm text-smoke">
-                No contributions yet. Be the first to back this campaign.
+        <div className="surface-dark p-8 xl:p-10">
+          <p className="eyebrow text-violet-200">Campaign readout</p>
+          <div className="mt-5 grid gap-0 border border-white/10">
+            <div className="grid grid-cols-2 gap-4 border-b border-white/10 px-5 py-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-white/45">Raised</p>
+                <p className="mt-2 font-display text-3xl text-white">{formatXlm(campaign.raised)}</p>
               </div>
-            ) : (
-              campaign.backers.slice(0, 6).map((backer) => (
-                <div
-                  key={`${backer.address}-${backer.timestamp}`}
-                  className="flex items-center justify-between rounded-3xl border border-ink/8 bg-paper px-4 py-4"
-                >
-                  <div>
-                    <p className="font-semibold text-ink">{truncateAddress(backer.address)}</p>
-                    <p className="text-sm text-smoke">
-                      {new Date(backer.timestamp).toLocaleString()}
-                    </p>
-                  </div>
-                  <p className="font-semibold text-ink">{formatXlm(backer.amount)}</p>
-                </div>
-              ))
-            )}
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-white/45">Goal</p>
+                <p className="mt-2 font-display text-3xl text-white">{formatXlm(campaign.goal)}</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4 border-b border-white/10 px-5 py-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-white/45">Backers</p>
+                <p className="mt-2 text-lg font-semibold text-white">{campaign.backers.length}</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-white/45">Remaining</p>
+                <p className="mt-2 text-lg font-semibold text-white">{formatXlm(remainingToGoal)}</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4 border-b border-white/10 px-5 py-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-white/45">Deadline</p>
+                <p className="mt-2 text-sm font-semibold text-white">{formatDeadline(campaign.deadline)}</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-white/45">Countdown</p>
+                <p className="mt-2 text-sm font-semibold text-white"><LiveCountdown deadline={campaign.deadline} /></p>
+              </div>
+            </div>
+            <div className="px-5 py-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/45">Creator</p>
+              <p className="mt-2 text-sm font-semibold text-white">{truncateAddress(campaign.creator)}</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <aside className="surface-dark sticky top-28 relative h-fit rounded-[34px] p-8">
+      <section className="grid gap-8 xl:grid-cols-[0.84fr_1.16fr]">
+        <aside className="surface-dark relative h-fit p-8 xl:sticky xl:top-28">
         {backMutation.isPending || claimMutation.isPending || refundMutation.isPending ? (
           <LoadingOverlay label="Updating campaign..." />
         ) : null}
-        <p className="eyebrow text-violet-200">Back this campaign</p>
-        <h2 className="mt-3 font-display text-4xl text-white">Support with XLM</h2>
+        <p className="eyebrow text-violet-200">Support desk</p>
+        <h2 className="mt-3 font-display text-4xl text-white">Back this campaign</h2>
         <p className="mt-3 text-sm leading-7 text-white/68">
-          Connect your wallet, enter an amount, and confirm the backing transaction.
+          Enter an amount, check your wallet balance, and act from the same place the campaign state is being tracked.
         </p>
         <CampaignActionsPanel
           showConnectHint={!session?.address}
@@ -201,7 +178,7 @@ export default function CampaignDetailsPage(): JSX.Element {
           onChange={(event) => setAmount(event.target.value)}
           className="mt-2 min-h-11 w-full rounded-[22px] border border-white/10 bg-white/8 px-4 py-3 text-base text-white outline-none"
         />
-        <div className="mt-4 rounded-3xl border border-white/10 bg-white/6 p-4">
+        <div className="mt-4 border border-white/10 bg-white/6 p-4">
           <p className="text-sm text-white/55">Your balance</p>
           {balanceQuery.isLoading ? (
             <div className="mt-2">
@@ -353,7 +330,103 @@ export default function CampaignDetailsPage(): JSX.Element {
             ) : null}
           </div>
         )}
-      </aside>
+        </aside>
+
+        <div className="space-y-8">
+          <section className="border border-ink/10 p-8">
+            <p className="eyebrow text-smoke">Campaign state</p>
+            <CampaignStateBanner campaign={campaign} status={status} />
+          </section>
+
+          <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="space-y-8">
+              <section className="border border-ink/10 p-8">
+                <p className="eyebrow text-smoke">Role and permissions</p>
+                <CampaignRolePanel
+                  isCreator={Boolean(isCreator)}
+                  contribution={contribution}
+                  deadlinePassed={deadlinePassed}
+                  canClaim={canClaim}
+                  canRefund={canRefund}
+                  deadline={campaign.deadline}
+                  claimed={campaign.claimed}
+                />
+              </section>
+
+              <section className="border border-ink/10 p-8">
+                <p className="eyebrow text-smoke">Context</p>
+                <dl className="mt-5 grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <dt className="text-sm text-smoke">Contribution model</dt>
+                    <dd className="mt-2 font-semibold text-ink">
+                      {goalMet ? 'Goal reached or above target' : 'Still collecting toward target'}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-smoke">Settlement path</dt>
+                    <dd className="mt-2 font-semibold text-ink">
+                      {deadlinePassed
+                        ? canClaim
+                          ? 'Creator claim available'
+                          : canRefund
+                            ? 'Backer refund available'
+                            : 'No pending account action'
+                        : 'Actions unlock after deadline'}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-smoke">Campaign mode</dt>
+                    <dd className="mt-2 font-semibold text-ink">
+                      {deadlinePassed ? 'Closed to new support' : 'Open to new support'}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-smoke">Current momentum</dt>
+                    <dd className="mt-2 font-semibold text-ink">
+                      {campaign.backers.length === 0
+                        ? 'Waiting for first contribution'
+                        : `${campaign.backers.length} backer${campaign.backers.length === 1 ? '' : 's'} recorded`}
+                    </dd>
+                  </div>
+                </dl>
+              </section>
+            </div>
+
+            <section className="border border-ink/10 p-8">
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <p className="eyebrow text-smoke">Backer ledger</p>
+                  <h2 className="mt-3 font-display text-3xl text-ink">Recent supporters</h2>
+                </div>
+              </div>
+              <div className="mt-6 space-y-0 border border-ink/10">
+                {campaign.backers.length === 0 ? (
+                  <div className="p-5 text-sm text-smoke">
+                    No contributions yet. Be the first to back this campaign.
+                  </div>
+                ) : (
+                  campaign.backers.slice(0, 6).map((backer) => (
+                    <div
+                      key={`${backer.address}-${backer.timestamp}`}
+                      className="flex items-center justify-between gap-4 border-b border-ink/10 px-5 py-4 last:border-b-0"
+                    >
+                      <div>
+                        <p className="font-semibold text-ink">{truncateAddress(backer.address)}</p>
+                        <p className="mt-1 text-sm text-smoke">
+                          {new Date(backer.timestamp).toLocaleString()}
+                        </p>
+                      </div>
+                      <p className="whitespace-nowrap font-semibold text-ink">
+                        {formatXlm(backer.amount)}
+                      </p>
+                    </div>
+                  ))
+                )}
+              </div>
+            </section>
+          </section>
+        </div>
+      </section>
     </div>
   );
 }
